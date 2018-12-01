@@ -4,7 +4,7 @@ const routes = require('./routes');
 const logger = require('express-logger');
 
 const app = express();
-const port = process.env.PORT || 4000;
+const port = 4390;//process.env.PORT || 4000;
 
 // server logger
 app.use(logger({path: "logfile.txt"}));

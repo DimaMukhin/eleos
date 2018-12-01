@@ -1,5 +1,6 @@
 const express = require('express');
 const FreeRoutes = require('./free.route');
+const OauthRoutes = require('./oauth.route');
 
 const router = express.Router();
 
@@ -12,5 +13,7 @@ router.get('/', (req, res) => {
 
 // routes
 router.use('/free', FreeRoutes);
+
+router.use('/oauth', OauthRoutes);
 
 module.exports = router;
