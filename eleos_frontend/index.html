@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="shortcut icon" href="favicon.png">
+	<meta charset="UTF-8">
+	<title> Eleos </title>
+	<link rel="stylesheet" type="text/css" href="style.css"/>	
+
+</head>
+<body>
+
+	<div class="title">
+	<h1>💪eleos💪</h1>
+	<br><br><br>
+	<center>
+	<p>
+	  💎 item:&nbsp&nbsp<input type="string" name="item" id="item"><br>
+	  🏠 city:&nbsp&nbsp&nbsp<input type="string" name="location" id="location"><br>
+	  📧 email:<input type="string" name="email" id="email"><br>
+	  <button>find</button>
+	</p>
+
+	<div id="results"> </div>
+
+	</center>
+	</div>
+
+<!--<script src="js/jquery-3.3.1.min.js"></script>
+ <script src="js/main.js"></script> -->
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+<script type="text/javascript"> 
+$(document).ready(function(){
+$("button").click(function(){
+	var item = $('#item').val();
+	var location = $('#location').val();
+	var email = $('#email').val();
+	
+	console.log(item);
+	console.log(location);
+	console.log(email);
+
+	// send ajax
+	//returns array of something
+	var html = '';
+
+	var array = 
+	{
+	    "listings": [
+	        {"title":"Clean pull-out couch/sleeper sofa (Cornwall/lettered streets)", "url":"https://bellingham.craigslist.org/zip/d/clean-pull-out-couch-sleeper/6762395659.html"},
+	        {"title":"Free couch/sofa", "url":"https://bellingham.craigslist.org/zip/d/free-couch-sofa/6762360073.html"},
+	        {"title":"Couch and Loveseat (Blaine)", "url":"https://bellingham.craigslist.org/zip/d/couch-and-loveseat/6762307300.html"}
+	    ]
+	};
+
+	var listings = array.listings;
+	for (var i in listings) 
+	{	
+    	var listing = listings[i];
+
+    	html += '<p>';
+
+    	html += '<a href="' + listing.url + '" target="_blank"> ' + listing.title + ' </a>'; 
+
+    	html += '</p>';
+    	console.log(html);
+	}
+
+    $("#results").html(html);
+});
+});
+
+</script>	
+</body>
+</html>
+
+
