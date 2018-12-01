@@ -2,7 +2,6 @@
 body{
 	margin: 0;
  	background: #ffffff;
- 	//background-image: url("money.png");
  	background-attachment: fixed;
  	background-repeat: no-repeat;
     background-size: 100% 100%;
@@ -11,10 +10,6 @@ body{
 .title {
 	margin: 100px;
 	text-align: center;
-}
-.logo {
-	height: 130px;
-	padding: 10px;
 }
 
 h1 {

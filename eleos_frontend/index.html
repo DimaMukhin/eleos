@@ -10,7 +10,7 @@
 <body>
 
 	<div class="title">
-	<h1>💪eleos💪</h1>
+	<h1>E L E O S</h1>
 	<br><br><br>
 	<center>
 	<p>
@@ -20,6 +20,7 @@
 	  <button>find</button>
 	</p>
 
+	<br>
 	<div id="results"> </div>
 
 	</center>
@@ -33,44 +34,50 @@
 
 <script type="text/javascript"> 
 $(document).ready(function(){
-$("button").click(function(){
-	var item = $('#item').val();
-	var location = $('#location').val();
-	var email = $('#email').val();
-	
-	console.log(item);
-	console.log(location);
-	console.log(email);
+	$("button").click(function(){
+		var item = $('#item').val();
+		var location = $('#location').val();
+		var email = $('#email').val();
+		var html = '';
 
-	// send ajax
-	//returns array of something
-	var html = '';
+		fetch(`http://localhost:4000/api/free?city=${location}&item=${item}&email=${email}`)
+			.then((res) => res.json())
+			.then((data) => makeHTML(data, html));
 
-	var array = 
-	{
-	    "listings": [
-	        {"title":"Clean pull-out couch/sleeper sofa (Cornwall/lettered streets)", "url":"https://bellingham.craigslist.org/zip/d/clean-pull-out-couch-sleeper/6762395659.html"},
-	        {"title":"Free couch/sofa", "url":"https://bellingham.craigslist.org/zip/d/free-couch-sofa/6762360073.html"},
-	        {"title":"Couch and Loveseat (Blaine)", "url":"https://bellingham.craigslist.org/zip/d/couch-and-loveseat/6762307300.html"}
-	    ]
-	};
+		/*
+		var array = 
+		{
+		    "listings": [
+		        {"title":"Clean pull-out couch/sleeper sofa (Cornwall/lettered streets)", "url":"https://bellingham.craigslist.org/zip/d/clean-pull-out-couch-sleeper/6762395659.html"},
+		        {"title":"Free couch/sofa", "url":"https://bellingham.craigslist.org/zip/d/free-couch-sofa/6762360073.html"},
+		        {"title":"Couch and Loveseat (Blaine)", "url":"https://bellingham.craigslist.org/zip/d/couch-and-loveseat/6762307300.html"}
+		    ]
+		};
+		*/
+	});
+});
 
-	var listings = array.listings;
-	for (var i in listings) 
-	{	
-    	var listing = listings[i];
+function makeHTML(array, html) {
 
-    	html += '<p>';
+	console.log(array); 
 
-    	html += '<a href="' + listing.url + '" target="_blank"> ' + listing.title + ' </a>'; 
+	if (array === undefined || array.length == 0) {
+    	html += '<p> will notify ' + $('#email').val() + ' asap!</p>';
+	} else {
+		for (var i in array) 
+		{	
+	    	var listing = array[i];
 
-    	html += '</p>';
-    	console.log(html);
+	    	html += '<p>';
+
+	    	html += '<a href="' + listing.url + '" target="_blank"> ' + listing.title + ' </a>'; 
+
+	    	html += '</p>';
+		}
 	}
 
-    $("#results").html(html);
-});
-});
+	$("#results").html(html);
+}
 
 </script>	
 </body>
