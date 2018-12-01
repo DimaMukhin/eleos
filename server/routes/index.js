@@ -1,5 +1,5 @@
 const express = require('express');
-const FreeRoutes = require('./free');
+const FreeRoutes = require('./free.route');
 
 const router = express.Router();
 
