@@ -1,5 +1,6 @@
 const express = require('express');
 const craigslistService = require('../services/craigslist.service');
+const mailerService = require('../services/mailer.service');
 
 const router = express.Router();
 
@@ -12,9 +13,16 @@ const DEFAULT_ITEM = 'couch';
 router.get('/', async (req, res) => {
     const city = req.query.city || DEFAULT_CITY;
     const item = req.query.item || DEFAULT_ITEM;
+    const email = req.query.email || 'fake@email.com';
 
     try {
         const listings = await craigslistService.findFree({ city, item });
+
+        // send notification email if there are no free items
+        if (listings && listings.length == 0) {
+            mailerService.sendWillNotifyEmail(email);
+        }
+
         res.status(200).send(listings);
     } catch (err) {
         res.status(400).send(err.message);
@@ -27,6 +35,11 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     const city = req.query.city || DEFAULT_CITY;
     const item = req.body.text || DEFAULT_ITEM;
+
+    // send notification email if there are no free items
+    if (listings && listings.length == 0) {
+        mailerService.sendWillNotifyEmail(email);
+    }
 
     try {
         const listings = await craigslistService.findFree({ city, item });
