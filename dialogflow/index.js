@@ -29,7 +29,7 @@ function getProducts(sessionClient, query) {
           .then(responses => {
           const result = responses[0].queryResult;
           // console.log(result);
-          if(result.intent.displayName == "product.search") {
+          if(result.intent != null & result.intent.displayName == "product.search") {
 
             if (result.parameters.fields.product.listValue.values.length === 0) {
               console.log("Couldn't understand Product! Need Annotation for: " + result.queryText);
@@ -61,7 +61,7 @@ function getProducts(sessionClient, query) {
         });
 }
 
-const query = 'I want a yellow mouse';
+const query = "I am looking for a blue dress";
 
 res = getProducts(sessionClient, query);
 res.then(products => {

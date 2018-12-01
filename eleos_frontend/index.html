@@ -4,8 +4,8 @@
 	<link rel="shortcut icon" href="favicon.png">
 	<meta charset="UTF-8">
 	<title> Eleos </title>
-	<link rel="stylesheet" type="text/css" href="style.css"/>	
-
+	<link rel="stylesheet" type="text/css" href="style.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"/>		
 </head>
 <body>
 
@@ -21,65 +21,43 @@
 	</p>
 
 	<br>
-	<div id="results"> </div>
+	<div class="results" id="results"> </div>
 
 	</center>
 	</div>
 
-<!--<script src="js/jquery-3.3.1.min.js"></script>
- <script src="js/main.js"></script> -->
-
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
-<script type="text/javascript"> 
-$(document).ready(function(){
-	$("button").click(function(){
-		var item = $('#item').val();
-		var location = $('#location').val();
-		var email = $('#email').val();
-		var html = '';
+	<script type="text/javascript"> 
+	$(document).ready(function(){
+		$("button").click(function(){
+			var item = $('#item').val();
+			var location = $('#location').val();
+			var email = $('#email').val();
+			var html = '';
 
-		fetch(`http://localhost:4000/api/free?city=${location}&item=${item}&email=${email}`)
-			.then((res) => res.json())
-			.then((data) => makeHTML(data, html));
-
-		/*
-		var array = 
-		{
-		    "listings": [
-		        {"title":"Clean pull-out couch/sleeper sofa (Cornwall/lettered streets)", "url":"https://bellingham.craigslist.org/zip/d/clean-pull-out-couch-sleeper/6762395659.html"},
-		        {"title":"Free couch/sofa", "url":"https://bellingham.craigslist.org/zip/d/free-couch-sofa/6762360073.html"},
-		        {"title":"Couch and Loveseat (Blaine)", "url":"https://bellingham.craigslist.org/zip/d/couch-and-loveseat/6762307300.html"}
-		    ]
-		};
-		*/
+			fetch(`http://localhost:4000/api/free?city=${location}&item=${item}&email=${email}`)
+				.then((res) => res.json())
+				.then((data) => makeHTML(data, html));
+		});
 	});
-});
 
-function makeHTML(array, html) {
-
-	console.log(array); 
-
-	if (array === undefined || array.length == 0) {
-    	html += '<p> will notify ' + $('#email').val() + ' asap!</p>';
-	} else {
-		for (var i in array) 
-		{	
-	    	var listing = array[i];
-
-	    	html += '<p>';
-
-	    	html += '<a href="' + listing.url + '" target="_blank"> ' + listing.title + ' </a>'; 
-
-	    	html += '</p>';
+	function makeHTML(array, html) {
+		console.log(array);
+		if (array === undefined || array.length == 0) {
+	    	html += '<p> will notify ' + $('#email').val() + ' asap!</p>';
+		} else {
+			for (listing of array) 
+			{	
+		    	html += '<p>';
+		    	html += '<a href="' + listing.url + '" target="_blank"> ' + listing.title + ' </a>'; 
+		    	html += '</p>';
+			}
 		}
+		$("#results").html(html);
 	}
-
-	$("#results").html(html);
-}
-
-</script>	
+	</script>	
 </body>
 </html>
 
