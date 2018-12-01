@@ -13,6 +13,7 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "express-logger": "0.0.3",
     "node-craigslist": "^1.2.2",
     "nodemon": "^1.18.7"
   }

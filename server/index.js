@@ -1,9 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const routes = require('./routes');
+const logger = require('express-logger');
 
 const app = express();
 const port = process.env.PORT || 4000;
+
+// server logger
+app.use(logger({path: "logfile.txt"}));
 
 // setting json parsing of http requests
 app.use(bodyParser.urlencoded({ extended: true }));
