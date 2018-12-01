@@ -25,12 +25,19 @@ router.get('/', async (req, res) => {
  * POST /free
  */
 router.post('/', async (req, res) => {
+    const slackReqObj = req.body;
     const city = req.query.city || DEFAULT_CITY;
-    const item = req.body.text || DEFAULT_ITEM;
+    const item = slackReqObj.text || DEFAULT_ITEM;
 
     try {
         const listings = await craigslistService.findFree({ city, item });
-        res.status(200).send(listings);
+
+        var responseString = "";
+
+        for (listing of listings) {
+            responseString+=`${listing.title}: ${listing.url} \n`;
+        }
+        res.status(200).send(responseString);
     } catch (err) {
         res.status(400).send(err.message);
     }
