@@ -55,12 +55,25 @@ router.post('/', async (req, res) => {
             mailerService.sendWillNotifyEmail(email);
         }
 
-        var responseString = "";
+        var attachments = [];
 
         for (listing of listings) {
-            responseString += `${listing.title}: ${listing.url} \n`;
+            if (attachments.length >= 5) {
+                break;
+            }
+            var jsonData = {};
+            jsonData['text'] = `${listing.title}: ${listing.url}`;
+            attachments.push(jsonData);
         }
-        res.status(200).send(responseString);
+
+        const response = {
+            response_type: 'in_channel',
+            channel: req.body.channel_id,
+            text: "Here's some listings you might like:",
+            attachments: attachments
+        };
+        
+        res.status(200).send(response);
     } catch (err) {
         res.status(400).send(err.message);
     }
