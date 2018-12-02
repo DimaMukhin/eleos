@@ -4,11 +4,112 @@
 	<link rel="shortcut icon" href="favicon.png">
 	<meta charset="UTF-8">
 	<title> Eleos </title>
-	<link rel="stylesheet" type="text/css" href="style.css"/>
+	<!--<link rel="stylesheet" type="text/css" href="style.css"/> -->
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"/>		
 </head>
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 <body>
 
+<section>
+	<div class="columns"> 
+		<div class="inputs column is-one-third is-vcentered"> 
+			<p> 
+				<p class="title"> ELEOS </p>
+
+				<div class="field is-horizontal">
+				<div class="field-label"> <label class="label">💎 item</label> </div>
+				<div class="field-body">
+					<div class="control">
+					    <input class="input" type="string" name="item" id="item">
+					  </div>
+					</div>
+				</div>
+
+				<div class="field is-horizontal">
+				<div class="field-label"> <label class="label">🏠 city</label> </div>
+				<div class="field-body">
+					<div class="control">
+					    <input class="input" type="string" name="location" id="location">
+					  </div>
+					</div>
+				</div>
+
+				<div class="field is-horizontal">
+				<div class="field-label"> <label class="label">📧 email</label> </div>
+				<div class="field-body">
+					<div class="control">
+					    <input class="input" type="string" name="email" id="email">
+					  </div>
+					</div>
+				</div>
+
+				<div class="control">
+				<button class="button is-link">Submit</button>
+				</div>
+		      </p>
+		</div>
+		<div class="column is-link"> 
+			<div class="results" id="results"> </div> 
+		</div>
+	</div>
+</section>
+
+<!--
+	<section class="hero is-fullheight-with-navbar">
+	  <div class="hero-body">
+	    <div class="container">
+	    	<div class="title">
+	  			<p class=title> HELIOS </p>
+	  		</div>
+		  	<div>
+		      <p>
+		      	
+				💎 item: <input type="string" name="item" id="item"><br>
+				🏠 city: <input type="string" name="location" id="location"><br>
+				📧 email: <input type="string" name="email" id="email"><br>
+				<button>find</button> 
+
+				<div class="column is-6 is-offset-4">
+				<div class="field is-horizontal">
+				<div class="field-label"> <label class="label">💎 Item</label> </div>
+				<div class="field-body">
+					<div class="control">
+					    <input class="input" type="string" name="item" id="item">
+					  </div>
+					</div>
+				</div>
+
+				<div class="field is-horizontal">
+				<div class="field-label"> <label class="label">🏠 city</label> </div>
+				<div class="field-body">
+					<div class="control">
+					    <input class="input" type="string" name="location" id="location">
+					  </div>
+					</div>
+				</div>
+
+				<div class="field is-horizontal">
+				<div class="field-label"> <label class="label">📧 email</label> </div>
+				<div class="field-body">
+					<div class="control">
+					    <input class="input" type="string" name="email" id="email">
+					  </div>
+					</div>
+				</div>
+
+				  <div class="control">
+				    <button class="button is-link">Submit</button>
+				  </div>
+				</div>
+		      </p>
+		     </div>
+		     <div class="results" id="results"> </div>
+	    </div>
+	  </div>
+	</section>
+	-->
+
+	<!--
 	<div class="title">
 	<h1>E L E O S</h1>
 	<br><br><br>
@@ -25,10 +126,10 @@
 
 	</center>
 	</div>
+	-->
 
+	<!-- scripts -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-
 	<script type="text/javascript"> 
 	$(document).ready(function(){
 		$("button").click(function(){
@@ -50,7 +151,7 @@
 		} else {
 			for (listing of array) 
 			{	
-		    	html += '<p>';
+		    	html += '<p> ';
 		    	html += '<a href="' + listing.url + '" target="_blank"> ' + listing.title + ' </a>'; 
 		    	html += '</p>';
 			}
