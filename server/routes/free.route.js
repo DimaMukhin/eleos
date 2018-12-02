@@ -49,10 +49,13 @@ router.post('/', async (req, res) => {
 
     try {
         const listings = await craigslistService.findFree({ city, item: dialogFlowedItem[0] });
-
+        var text;
         // send notification email if there are no free items
         if (listings && listings.length == 0) {
             mailerService.sendWillNotifyEmail(email);
+            text = "We couldn't find any listings, we'll send you an email when listings appear.";
+        } else {
+            text = "Here's some listings you might like:"
         }
 
         var attachments = [];
@@ -69,7 +72,7 @@ router.post('/', async (req, res) => {
         const response = {
             response_type: 'in_channel',
             channel: req.body.channel_id,
-            text: "Here's some listings you might like:",
+            text: text,
             attachments: attachments
         };
         
