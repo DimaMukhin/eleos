@@ -30,7 +30,7 @@ dialogflowService.getProducts = (query) => {
         .detectIntent(request)
         .then(responses => {
             const result = responses[0].queryResult;
-            console.log(result);
+            // console.log(result);
             if (result.intent != null && result.intent.displayName == "product.search") {
 
                 if (result.parameters.fields.product.listValue.values.length === 0) {
