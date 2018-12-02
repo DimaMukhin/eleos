@@ -47,18 +47,18 @@ router.post('/', async (req, res) => {
     // dialog flowwing the item
     const dialogFlowedItem = await dialogflowService.getProducts(item) || [DEFAULT_ITEM];
 
-    // send notification email if there are no free items
-    if (listings && listings.length == 0) {
-        mailerService.sendWillNotifyEmail(email);
-    }
-
     try {
         const listings = await craigslistService.findFree({ city, item: dialogFlowedItem[0] });
+
+        // send notification email if there are no free items
+        if (listings && listings.length == 0) {
+            mailerService.sendWillNotifyEmail(email);
+        }
 
         var responseString = "";
 
         for (listing of listings) {
-            responseString+=`${listing.title}: ${listing.url} \n`;
+            responseString += `${listing.title}: ${listing.url} \n`;
         }
         res.status(200).send(responseString);
     } catch (err) {
