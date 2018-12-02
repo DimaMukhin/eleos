@@ -1,34 +1,24 @@
-
-body{
-	margin: 0;
- 	background: #ffffff;
- 	background-attachment: fixed;
- 	background-repeat: no-repeat;
-    background-size: 100% 100%;
+.add-top-margin {
+	padding-top: 200px !important;
 }
 
-.title {
-	margin: 100px;
-	text-align: center;
+.add-left-margin {
+	padding-left: 50px !important;
 }
 
-.results {
-	text-align: left;
+.add-little-top {
+	padding-top: 50px !important;
 }
 
-h1 {
-	font-family: sans-serif;
-	font-size: 40px;
-	font-weight: lighter;
-	letter-spacing: 10px;
-	color: #000000;
+.white-bg {
+	background-color: white;
 }
 
-p {
-	font-family: sans-serif;
-	font-size: 15px;
-	font-weight: lighter;
-	color: #000000;
+.add-bg-purple {
+	background-color: #F5D4FF;
+	min-height: 100vh;
 }
 
+body {
+	min-height: 100vh;
 }
