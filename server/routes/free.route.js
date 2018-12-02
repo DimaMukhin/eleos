@@ -37,9 +37,12 @@ router.get('/', async (req, res) => {
  * POST /free
  */
 router.post('/', async (req, res) => {
-    const slackReqObj = req.body;
-    const city = req.query.city || DEFAULT_CITY;
-    const item = slackReqObj.text || DEFAULT_ITEM;
+    const firstSplit = req.body.text.split(" in ", 2);
+    const secondSplit = firstSplit[1].split(" notify ", 2);
+
+    const item = firstSplit[0] || DEFAULT_ITEM;
+    const city = secondSplit[0] || DEFAULT_CITY;
+    const email = secondSplit[1] || "";
 
     // dialog flowwing the item
     const dialogFlowedItem = await dialogflowService.getProducts(item) || [DEFAULT_ITEM];
