@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
     const email = req.query.email || 'fake@email.com';
 
     // dialog flowwing the item
-    const dialogFlowedItem = await dialogflowService.getProducts(item) || [DEFAULT_ITEM];
+    const dialogFlowedItem = await dialogflowService.getProducts(item) || [item];
 
     try {
         const listings = await craigslistService.findFree({ city, item: dialogFlowedItem[0] });
@@ -45,7 +45,8 @@ router.post('/', async (req, res) => {
     const email = secondSplit[1] || "";
 
     // dialog flowwing the item
-    const dialogFlowedItem = await dialogflowService.getProducts(item) || [DEFAULT_ITEM];
+    const dialogFlowedItem = await dialogflowService.getProducts(item) || [item];
+    console.log('the item', dialogFlowedItem);
 
     try {
         const listings = await craigslistService.findFree({ city, item: dialogFlowedItem[0] });
