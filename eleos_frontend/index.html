@@ -91,7 +91,7 @@ $(document).ready(function(){
 function makeHTML(array, html) {
 	console.log(array);
 	if (array === undefined || array.length == 0) {
-		html += '<p> will notify ' + $('#email').val() + ' asap!</p>';
+		html += '<p> We could not find any listings, we will send you an email when lisitings appear';
 	} else {
 		for (listing of array)
 		{
