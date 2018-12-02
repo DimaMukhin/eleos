@@ -9,6 +9,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- Bulma Version 0.7.2-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 	<style type="text/css">
 	html,
 	body {
@@ -23,7 +24,7 @@
 <body class="">
 				<div class="columns">
 					<div class="column is-4 add-top-margin add-bg-purple add-left-margin">
-						<h1 class="title">ELEOS</h1>
+						<h1 class="title">Free List</h1>
 
 						<div class="our_form has-text-centered">
 
@@ -66,7 +67,8 @@
 						</div>
 					</div>
 					<div class="column white-bg add-left-margin add-little-top">
-						<div class="results" id="results"> </div>
+						<div class="columns is-variable is-5 is-multiline" id="results">
+						</div>
 					</div>
 				</div>
 
@@ -93,9 +95,15 @@ function makeHTML(array, html) {
 	} else {
 		for (listing of array)
 		{
-			html += '<p> ';
-			html += '<a href="' + listing.url + '" target="_blank"> ' + listing.title + ' </a>';
-			html += '</p>';
+			html += '<div class="column is-4"><div class="card"><div class="card-content"><div class="content"><h4 class="Title is-3">';
+			html += listing.title;
+			html += '</h4><div class="columns is-gapless"><div class="column is-10"><time>';
+			html += listing.date;
+			html += '</time></div><div class="column has-text-right"><a href="';
+			html += listing.url;
+			html += '><span class="icon has-text-link"><i class="fas fa-link"></i></span></a>';
+			html += '</div></div></div></div></div></div>';
+
 		}
 	}
 	$("#results").html(html);
