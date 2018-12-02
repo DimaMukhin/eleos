@@ -1,6 +1,7 @@
 const express = require('express');
 const craigslistService = require('../services/craigslist.service');
 const mailerService = require('../services/mailer.service');
+const dialogflowService = require('../services/dialogflow.service');
 
 const router = express.Router();
 
@@ -15,8 +16,11 @@ router.get('/', async (req, res) => {
     const item = req.query.item || DEFAULT_ITEM;
     const email = req.query.email || 'fake@email.com';
 
+    // dialog flowwing the item
+    const dialogFlowedItem = await dialogflowService.getProducts(item) || [DEFAULT_ITEM];
+
     try {
-        const listings = await craigslistService.findFree({ city, item });
+        const listings = await craigslistService.findFree({ city, item: dialogFlowedItem[0] });
 
         // send notification email if there are no free items
         if (listings && listings.length == 0) {
@@ -37,13 +41,16 @@ router.post('/', async (req, res) => {
     const city = req.query.city || DEFAULT_CITY;
     const item = slackReqObj.text || DEFAULT_ITEM;
 
+    // dialog flowwing the item
+    const dialogFlowedItem = await dialogflowService.getProducts(item) || [DEFAULT_ITEM];
+
     // send notification email if there are no free items
     if (listings && listings.length == 0) {
         mailerService.sendWillNotifyEmail(email);
     }
 
     try {
-        const listings = await craigslistService.findFree({ city, item });
+        const listings = await craigslistService.findFree({ city, item: dialogFlowedItem[0] });
 
         var responseString = "";
 
